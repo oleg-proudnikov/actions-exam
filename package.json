@@ -1,6 +1,6 @@
 {
   "name": "@oleg-proudnikov/actions-exam",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Publish GitHub Package",
   "main": "index.js",
   "scripts": {

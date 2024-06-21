@@ -23,6 +23,8 @@ jobs:
 
       - name: Tag
         run: |
+          git tag -d actions-exam-2.0.0
+          git push -d origin tag actions-exam-2.0.0
           git tag actions-exam-2.0.0
           git push origin tag actions-exam-2.0.0
         env:

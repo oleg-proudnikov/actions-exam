@@ -19,6 +19,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Tag
+        run: |
+          git tag actions-exam-2.0.0
+          git push origin tag actions-exam-2.0.0
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:

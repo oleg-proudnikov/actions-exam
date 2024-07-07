@@ -24,7 +24,7 @@ jobs:
   
   job-4:
     needs: [job-2, job-3]
-    if: always() && needs.job-2.result == 'success'
+    if: needs.job-2.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - run: echo job-4

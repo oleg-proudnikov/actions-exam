@@ -13,7 +13,7 @@ jobs:
     needs: job-1
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1
+      - run: exit 0
   
   job-3:
     if: false

@@ -1,3 +1,4 @@
+name: Skip
 
 on:
   workflow_dispatch:

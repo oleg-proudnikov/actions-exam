@@ -3,7 +3,6 @@ project:
 website:
   title: "My Quarto Site"
   description: "A site created with Quarto"
-  navbar:
   page-footer: Powered by Quarto
 format:
   html:

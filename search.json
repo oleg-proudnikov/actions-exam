@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to My Quarto Site",
+    "section": "",
+    "text": "Introduction\nThis is the main landing page of my Quarto site."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "About Me\nThis page contains information about me."
+  }
+]

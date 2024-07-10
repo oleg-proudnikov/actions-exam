@@ -1,7 +1,0 @@
----
-title: "Welcome to My Quarto Site"
----
-
-# Introduction
-
-This is the main landing page of my Quarto site.

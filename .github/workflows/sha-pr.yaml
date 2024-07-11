@@ -1,0 +1,40 @@
+name: sha-pr
+
+on:
+  push:
+
+jobs:
+  detect-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get PR that triggered the push
+        id: get-pr
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const commitSha = context.sha;
+
+            const { data: pullRequests } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha
+            });
+
+            if (pullRequests.length === 0) {
+              core.setOutput('pr_number', 'No PR associated with this push.');
+            } else {
+              const pr = pullRequests[0];
+              core.setOutput('pr_number', pr.number);
+              core.setOutput('pr_title', pr.title);
+              core.setOutput('pr_url', pr.html_url);
+            }
+
+      - name: Output PR Info
+        run: |
+          echo "PR Number: ${{ steps.get-pr.outputs.pr_number }}"
+          echo "PR Title: ${{ steps.get-pr.outputs.pr_title }}"
+          echo "PR URL: ${{ steps.get-pr.outputs.pr_url }}"

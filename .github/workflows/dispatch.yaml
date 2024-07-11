@@ -11,7 +11,7 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          const workflowName = 'output'; // Replace with the name of your workflow
+          const workflowName = "output"; // Replace with the name of your workflow
 
           const workflows = await github.rest,actions.listRepoWorkflows({
             owner: context.repo.owner,

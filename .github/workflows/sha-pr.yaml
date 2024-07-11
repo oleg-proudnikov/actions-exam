@@ -1,6 +1,7 @@
 name: sha-pr
 
 on:
+  workflow_dispatch:
   push:
     branches:
     - "**"

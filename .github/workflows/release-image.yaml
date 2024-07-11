@@ -6,7 +6,7 @@ on:
     branches: ['main-']
   release:
     types: [created]
-    
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -23,7 +23,7 @@ jobs:
 
       - name: Tag
         run: |
-          git tag -d actions-exam-2.0.0 || true       
+          git tag -d actions-exam-2.0.0 || true
           git push -d origin tag actions-exam-2.0.0 || true
           git tag actions-exam-2.0.0
           git push origin tag actions-exam-2.0.0
@@ -36,7 +36,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5

@@ -12,10 +12,10 @@ jobs:
       with:
         script: |
           const workflowName = 'output'; // Replace with the name of your workflow
-          const { owner, repo } = context.repo;
+
           const workflows = await github.rest,actions.listRepoWorkflows({
-            owner,
-            repo
+            owner: context.repo.owner,
+            repo: context.repo.repo
           });
 
           const workflow = workflows.data.workflows.find(wf => wf.name === workflowName);

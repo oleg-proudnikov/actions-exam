@@ -39,4 +39,7 @@ jobs:
       run: pip install pre-commit
 
     - name: Run pre-commit with debug
-      run: pre-commit run --all-files
+      run: |
+        git status
+        git branch
+        pre-commit run

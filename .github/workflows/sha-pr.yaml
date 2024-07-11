@@ -2,6 +2,8 @@ name: sha-pr
 
 on:
   push:
+    branches:
+    - "**"
 
 jobs:
   detect-pr:

@@ -1,0 +1,11 @@
+name: pr-closed
+
+on:
+  pull_request:
+    types: [ closed ]
+
+jobs:
+  show:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo ${{ github.head_ref }} $GITHUB_REF

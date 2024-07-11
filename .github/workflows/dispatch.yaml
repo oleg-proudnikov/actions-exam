@@ -11,9 +11,22 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
+          const workflowName = 'output'; // Replace with the name of your workflow
+          const { owner, repo } = context.repo;
+          const workflows = await github.actions.listRepoWorkflows({
+            owner,
+            repo
+          });
+
+          const workflow = workflows.data.workflows.find(wf => wf.name === workflowName);
+
+          if (!workflow) {
+            throw new Error(`Workflow with name '${workflowName}' not found`);
+          }
+
           await github.rest.actions.createWorkflowDispatch({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            workflow_id: 'output.yml',
+            workflow_id: workflow.id,
             ref: 'main'
           });

@@ -1,0 +1,41 @@
+name: multiline-body
+
+on:
+  workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get last notification
+        id: check_repo
+        run: |
+          echo "table<<EOF" >> $GITHUB_OUTPUT
+          echo '| a | b |
+          |---|---|
+          | 1 | 2 |
+          ' >> $GITHUB_OUTPUT
+          echo EOF >> $GITHUB_OUTPUT
+      - name: Create Issue
+        run: |
+          echo "table='${{ steps.check_repo.outputs.table }}'" | awk '{printf "%s\\n", $0}' >> $GITHUB_ENV
+          issue_body='{
+            "title": "Titolo",
+            "body": "${{ env.table }}"
+          }'
+
+          echo "$issue_body"
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d "$issue_body" https://api.github.com/repos/${GITHUB_REPOSITORY}/issues
+
+
+  notification:
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: always()
+    steps:
+      - name: Notification
+        timeout-minutes: 1
+        run: |
+          echo "$LAST_NOTIFICATION_MESSAGE"
+        env:
+          LAST_NOTIFICATION_MESSAGE: ${{ needs.deploy.outputs.lastNotificationMessage }}

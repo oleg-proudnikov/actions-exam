@@ -19,6 +19,7 @@ jobs:
       - name: Create table environment
         run: |
           echo '${{ steps.check_repo.outputs.table }}'
+          echo "table='${{ steps.check_repo.outputs.table }}'" | awk '{printf "%s\\n", $0}'
           echo "table='${{ steps.check_repo.outputs.table }}'" | awk '{printf "%s\\n", $0}' >> $GITHUB_ENV
 
       - name: Create Issue
@@ -28,6 +29,5 @@ jobs:
             "body": "${{ env.table }}"
           }'
 
-          echo "$issue_body"
-          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d "$issue_body" https://api.github.com/repos/${GITHUB_REPOSITORY}/issues
+          curl -X POST -H "Authorization: token ${{ secrets.PAT }}" -d "$issue_body" https://api.github.com/repos/${GITHUB_REPOSITORY}/issues
 

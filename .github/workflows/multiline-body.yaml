@@ -10,17 +10,19 @@ jobs:
       - name: Output multiline table
         id: check_repo
         run: |
-          echo "table<<EOF" >> $GITHUB_OUTPUT
+          {
+          echo "table<<EOF"
           echo '| a | b |
           |---|---|
           | 1 | 2 |
-          ' >> $GITHUB_OUTPUT
-          echo EOF >> $GITHUB_OUTPUT
+          '
+          echo EOF
+          } >> $GITHUB_OUTPUT
       - name: Create table environment
         run: |
           echo '${{ steps.check_repo.outputs.table }}'
-          echo "table='${{ steps.check_repo.outputs.table }}'" | awk '{printf "%s\\n", $0}'
-          echo "table='${{ steps.check_repo.outputs.table }}'" | awk '{printf "%s\\n", $0}' >> $GITHUB_ENV
+          echo -n "table=${{ steps.check_repo.outputs.table }}" | awk '{printf "%s\\n", $0}'
+          echo -n "table=${{ steps.check_repo.outputs.table }}" | awk '{printf "%s\\n", $0}' >> $GITHUB_ENV
 
       - name: Create Issue
         run: |

@@ -18,6 +18,7 @@ jobs:
           echo EOF >> $GITHUB_OUTPUT
       - name: Create Issue
         run: |
+          echo '${{ steps.check_repo.outputs.table }}'
           echo "table='${{ steps.check_repo.outputs.table }}'" | awk '{printf "%s\\n", $0}' >> $GITHUB_ENV
           issue_body='{
             "title": "Titolo",

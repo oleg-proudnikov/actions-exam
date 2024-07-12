@@ -20,8 +20,6 @@ jobs:
           } >> $GITHUB_OUTPUT
       - name: Create table environment
         run: |
-          echo '${{ steps.check_repo.outputs.table }}'
-          echo -n "table=${{ steps.check_repo.outputs.table }}" | awk '{printf "%s\\n", $0}'
           echo -n "table=${{ steps.check_repo.outputs.table }}" | awk '{printf "%s\\n", $0}' >> $GITHUB_ENV
 
       - name: Create Issue

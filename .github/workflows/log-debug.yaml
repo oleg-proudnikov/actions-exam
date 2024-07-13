@@ -1,0 +1,17 @@
+name: Rerun with Debug
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        type: choice
+        description: Chose log level
+        options:
+          - info
+          - debug
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ inputs.logLevel }}

@@ -14,6 +14,8 @@ jobs:
     steps:
       - run: |
           ID_TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://demo" | jq -r .value)
+          echo $ID_TOKEN
+          echo ===
           echo $ID_TOKEN | base64
 
 # workflow_dispatch: "sub": "repo:oleg-proudnikov/actions-exam:ref:refs/heads/main"

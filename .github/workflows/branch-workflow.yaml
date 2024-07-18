@@ -1,7 +1,10 @@
 name: branch-workflow
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+  push:
+    branches:
+      - branch-workflow
 
 jobs:
   run-2:

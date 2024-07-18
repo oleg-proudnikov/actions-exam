@@ -1,0 +1,13 @@
+name: branch-workflow
+
+on:
+  workflow_dispatch
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Trigger Playwright e2e Tests workflow
+        run: echo 1

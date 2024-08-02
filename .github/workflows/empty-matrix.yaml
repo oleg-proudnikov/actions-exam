@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: []
+        image: [a]
+        exclude:
+          - image: a
     steps:
       - run: echo ${{ matrix.image }}

@@ -4,9 +4,29 @@ on:
   workflow_dispatch
 
 jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      library: ${{ steps.filter.outputs.library }}
+      workers: ${{ steps.filter.outputs.workers }}
+      collector: ${{ steps.filter.outputs.collector }}
+      api: ${{ steps.filter.outputs.api }}
+      webhook: ${{ steps.filter.outputs.webhook }}
+    steps:
+      - id: filter
+        run: |
+          echo library=false >> $GITHUB_OUTPUT
+          echo workers=false >> $GITHUB_OUTPUT
+          echo collector=false >> $GITHUB_OUTPUT
+          echo api=false >> $GITHUB_OUTPUT
+          echo webhook=false >> $GITHUB_OUTPUT
+
   docker:
     name: Build and push Docker Images
+    needs: changes
     runs-on: ubuntu-latest
+    if: needs.changes.outputs.collector == 'true' || needs.changes.outputs.library == 'true' || needs.changes.outputs.workers == 'true' || needs.changes.outputs.api == 'true' || needs.changes.outputs.webhook == 'true'
     strategy:
       matrix:
         image:
@@ -15,13 +35,13 @@ jobs:
           - api
           - webhook
         isCollector:
-          - true
+          - ${{ needs.changes.outputs.collector == 'true' || needs.changes.outputs.library == 'true'}}
         isWorker:
-          - false
+          - ${{ needs.changes.outputs.workers == 'true' || needs.changes.outputs.library == 'true'}}
         isApi:
-          - false
+          - ${{ needs.changes.outputs.api == 'true' || needs.changes.outputs.library == 'true' }}
         isWebhook:
-          - false
+          - ${{ needs.changes.outputs.webhook == 'true' || needs.changes.outputs.library == 'true'}}
         exclude:
           - isCollector: false
             image: collector

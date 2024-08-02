@@ -1,35 +1,14 @@
-name: matrix
+name: empty-matrix
 
 on:
   workflow_dispatch
 
 jobs:
   docker:
-    name: Build and push Docker Images
+    name: Empty Matrix
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image:
-          - collector
-          - workers
-          - api
-          - webhook
-        isCollector:
-          - true
-        isWorker:
-          - false
-        isApi:
-          - false
-        isWebhook:
-          - false
-        exclude:
-          - isCollector: false
-            image: collector
-          - isWorker: false
-            image: workers
-          - isApi: false
-            image: api
-          - isWebhook: false
-            image: webhook
+        image: []
     steps:
       - run: echo ${{ matrix.image }}

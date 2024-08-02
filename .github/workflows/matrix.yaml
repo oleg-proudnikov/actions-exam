@@ -1,0 +1,33 @@
+name: matrix
+
+on:
+  workflow_dispatch
+
+jobs:
+  docker:
+    name: Build and push Docker Images
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - collector
+          - workers
+          - api
+          - webhook
+        isCollector:
+          - false
+        isWorker:
+          - false
+        isApi:
+          - false
+        isWebhook:
+          - false
+        exclude:
+          - isCollector: false
+            image: collector
+          - isWorker: false
+            image: workers
+          - isApi: false
+            image: api
+          - isWebhook: false
+            image: webhook

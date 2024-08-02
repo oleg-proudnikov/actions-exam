@@ -7,7 +7,7 @@ jobs:
   docker:
     name: Empty Matrix
     runs-on: ubuntu-latest
-    if: matrix.image != ''
+    if: ${{ matrix.image != '' }}
     strategy:
       matrix:
         image: [a]

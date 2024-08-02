@@ -31,3 +31,5 @@ jobs:
             image: api
           - isWebhook: false
             image: webhook
+    steps:
+      - run: echo ${{ matrix.image }}

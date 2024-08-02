@@ -18,7 +18,7 @@ jobs:
         run: |
           echo library=false >> $GITHUB_OUTPUT
           echo workers=false >> $GITHUB_OUTPUT
-          echo collector=false >> $GITHUB_OUTPUT
+          echo collector=true >> $GITHUB_OUTPUT
           echo api=false >> $GITHUB_OUTPUT
           echo webhook=false >> $GITHUB_OUTPUT
 

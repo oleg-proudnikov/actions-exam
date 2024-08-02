@@ -15,7 +15,7 @@ jobs:
           - api
           - webhook
         isCollector:
-          - false
+          - true
         isWorker:
           - false
         isApi:

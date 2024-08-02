@@ -1,0 +1,17 @@
+name: empty-matrix-2
+
+on:
+  workflow_dispatch
+
+jobs:
+  docker:
+    name: Empty Matrix
+    runs-on: ubuntu-latest
+    if: matrix.image != ''
+    strategy:
+      matrix:
+        image: [a]
+        exclude:
+          - image: a
+    steps:
+      - run: echo ${{ matrix.image }}

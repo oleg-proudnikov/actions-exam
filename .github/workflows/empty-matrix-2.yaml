@@ -12,6 +12,6 @@ jobs:
         image: [a]
         exclude:
           - image: a
-    if: ${{ matrix.image != '' }}
     steps:
       - run: echo ${{ matrix.image }}
+    if: ${{ matrix.image != '' }}

@@ -26,7 +26,12 @@ jobs:
     name: Build and push Docker Images
     needs: changes
     runs-on: ubuntu-latest
-    if: needs.changes.outputs.collector == 'true' || needs.changes.outputs.library == 'true' || needs.changes.outputs.workers == 'true' || needs.changes.outputs.api == 'true' || needs.changes.outputs.webhook == 'true'
+    if: |
+      needs.changes.outputs.collector == 'true' ||
+      needs.changes.outputs.library == 'true' ||
+      needs.changes.outputs.workers == 'true' ||
+      needs.changes.outputs.api == 'true' ||
+      needs.changes.outputs.webhook == 'true'
     strategy:
       matrix:
         image:

@@ -31,7 +31,7 @@ jobs:
         run: echo "$OUTPUT1 $OUTPUT2"
       - run: |
           echo repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
-          gh api repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
+          gh api repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs
         env:
           GH_TOKEN: ${{ github.token }}
       - run: |

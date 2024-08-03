@@ -30,8 +30,7 @@ jobs:
           OUTPUT2: ${{needs.job1.outputs.output2}}
         run: echo "$OUTPUT1 $OUTPUT2"
       - run: |
-          echo '${{ toJson(github) }}'
-          echo '${{ toJson(job) }}'
+          gh api repos/$GITHUB_ACTION_REPOSITORY/actions/runs/$GITHUB_RUN_ID
       - run: |
          echo ${{ vars.URL }}
          curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -H "X-GitHub-Api-Version: 2022-11-28" \

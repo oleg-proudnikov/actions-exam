@@ -10,6 +10,8 @@ jobs:
       - name: docker run
         run: |
           docker run --rm -d -p 8080:80 nginx
+          which netstat
+          netstat -n
       - name: netstat
         run: |
           netstat -n| grep 8080

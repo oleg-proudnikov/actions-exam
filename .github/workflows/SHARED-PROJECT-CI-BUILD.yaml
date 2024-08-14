@@ -1,0 +1,22 @@
+name: SHARED-PROJECT-CI-BUILD
+
+on:
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - 'shared-project/**'
+
+jobs:
+  ci-build:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout Source
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Build Master
+        id: buildmaster
+        run: |
+          ./shared-project/publish.sh

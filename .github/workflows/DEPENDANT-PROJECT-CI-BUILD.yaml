@@ -1,0 +1,28 @@
+name: DEPENDANT-PROJECT-CI-BUILD
+
+on:
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - 'dependant-project/**'
+  workflow_run:
+    workflows: ["SHARED-PROJECT-CI-BUILD"]
+    types:
+      - completed
+
+jobs:
+  ci-build:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_run'
+    steps:
+      - name: Checkout Source
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+
+      - name: Build Master
+        id: buildmaster
+        run: |
+          ./dependant-project/publish.sh

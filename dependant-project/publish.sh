@@ -1,1 +1,1 @@
-echo dependent-project/publish.sh
+echo dependent-project/publish.sh chmod +x

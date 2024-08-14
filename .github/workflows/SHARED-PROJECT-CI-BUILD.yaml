@@ -19,4 +19,5 @@ jobs:
       - name: Build Master
         id: buildmaster
         run: |
+          chmod +x shared-project/publish.sh
           ./shared-project/publish.sh

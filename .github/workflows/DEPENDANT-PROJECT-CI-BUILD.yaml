@@ -25,4 +25,5 @@ jobs:
       - name: Build Master
         id: buildmaster
         run: |
+          chmod +x dependant-project/publish.sh
           ./dependant-project/publish.sh

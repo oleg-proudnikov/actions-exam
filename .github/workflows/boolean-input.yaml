@@ -16,6 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: call graphicstransform deploy
-        if: inputs.graphics
+        if: ${{ inputs.graphics == true }}
         run: echo graphics
 

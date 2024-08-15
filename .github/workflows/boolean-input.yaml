@@ -16,8 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show github context
-        run: echo '${{ toJson(github) }}'
+        run: echo '${{ toJson(github.event.inputs) }}'
+      - name: Show inputs context
+        run: echo '${{ toJson(inputs) }}'
       - name: call graphicstransform deploy
-        if: ${{ github.event.inputs.graphics == true }}
+        if: ${{ github.event.inputs.graphics == "true" }}
         run: echo graphics
 

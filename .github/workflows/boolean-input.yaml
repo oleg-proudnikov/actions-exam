@@ -20,6 +20,6 @@ jobs:
       - name: Show inputs context
         run: echo '${{ toJson(inputs) }}'
       - name: call graphicstransform deploy
-        if: ${{ github.event.inputs.graphics == "true" }}
+        if: ${{ github.event.inputs.graphics == 'true' }}
         run: echo graphics
 

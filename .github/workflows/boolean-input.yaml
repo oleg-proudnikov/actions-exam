@@ -1,0 +1,19 @@
+name: boolean-input
+
+on:
+  workflow_dispatch:
+    inputs:
+      graphics:
+        type: boolean
+      tags:
+        description: 'trigger manually'
+  push:
+    branches:
+      - "release"
+
+jobs:
+  graphics:
+    if: inputs.graphics
+    name: call graphicstransform deploy
+    run: echo graphics
+

@@ -13,7 +13,8 @@ on:
 
 jobs:
   graphics:
-    if: inputs.graphics
-    name: call graphicstransform deploy
-    run: echo graphics
+    steps:
+      - name: call graphicstransform deploy
+        if: inputs.graphics
+        run: echo graphics
 

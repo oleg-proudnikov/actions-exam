@@ -21,3 +21,79 @@ jobs:
         if: github.event.inputs.graphics == 'true'
         run: echo graphics
 
+    api-deploy:
+      needs: run-unit-rests
+      uses: my/repo/.github/workflows/reusable_wf.yml@v1.0.1
+      with:
+        environment: DEV
+        working-directory: app/stacks/api_layer_stack
+        cdk-command: deploy
+        cdk-args: app_api -c myparam1=bla -c myparam2=bla --require-approval never
+
+
+    lambda-deploy:
+      needs: run-unit-rests
+      uses: my/repo/.github/workflows/reusable_wf.yml@v1.0.1
+      with:
+        environment: DEV
+        working-directory: app/stacks/lambda_layer_stack
+        cdk-command: deploy
+        cdk-args: app_func -c myparam2=bla --require-approval never
+
+
+    api-deploy-multi-command:
+      needs: run-unit-rests
+      uses: my/repo/.github/workflows/reusable_wf.yml@v1.0.1
+      with:
+        environment: DEV
+        title:  ${{ inputs.cdk-command }} for Account ${{ vars.ACCOUNT }}
+        run: |
+          export this_ACCOUNT=${{ vars.ACCOUNT }}
+          export this_REGION=${{ vars.REGION }}
+          cd app/stacks/api_layer_stack
+          cdk deploy app_api -c myparam1=bla -c myparam2=bla --require-approval never
+
+
+    lambda-deploy-multi-command:
+      needs: run-unit-rests
+      uses: my/repo/.github/workflows/reusable_wf.yml@v1.0.1
+      with:
+        environment: DEV
+        title:  ${{ inputs.cdk-command }} for Account ${{ vars.ACCOUNT }}
+        run: |
+          export this_ACCOUNT=${{ vars.ACCOUNT }}
+          export this_REGION=${{ vars.REGION }}
+          cd app/stacks/api_layer_stack
+          cdk deploy app_func -c myparam2=bla --require-approval never
+
+
+    jobs:
+      run-job:
+        runs-on: ubuntu-latest
+        environment: ${{ inputs.environment }}
+        steps:
+          - name: Run CDK ${{ inputs.cdk-command }} for Account ${{ vars.ACCOUNT }}
+            if: inputs.cdk-command != ''
+            working-directory: ${{ inputs.working-directory }}
+            run: cdk ${{ inputs.cdk-command }} ${{ inputs.cdk-args }}
+            env:
+              this_ACCOUNT: ${{ vars.ACCOUNT }}
+              this_REGION: ${{ vars.REGION }}
+          - name: Run CDK ${{ inputs.title }}
+            if: inputs.run != ''
+            run: ${{ inputs.run }}
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        strategy:
+          fail-fast: false
+          matrix:
+            node-version: [20.x, 18.x]
+
+        steps:
+          - uses: actions/checkout@v4
+          - name: Use Node.js
+            uses: actions/setup-node@v4
+            with:
+              node-version: ${{ matrix.node-version }}

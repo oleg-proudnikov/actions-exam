@@ -12,23 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      ##############################
       - name: Import external glossaries
         run: |
           git pull
           echo $RANDOM > workflow2.txt
-      ##############################
 
-
-
-      ##############################
       - name: Commit and push the changes
         run: |
-          cat .git/config
-
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          #git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/oleg-proudnikov/actions-exam.git
 
           git add .
           git commit -m "chore: fetch content from various external sources"

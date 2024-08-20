@@ -9,9 +9,7 @@ permissions:
 jobs:
   workflow1:
     uses: ./.github/workflows/workflow1.yaml
-    secrets: inherit
 
   workflow2:
     needs: workflow1
     uses: ./.github/workflows/workflow2.yaml
-    secrets: inherit

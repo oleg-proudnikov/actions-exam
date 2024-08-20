@@ -5,8 +5,8 @@ on:
 
 jobs:
   workflow1:
-    uses: ./.github/workflows/workflow1.yml
+    uses: ./.github/workflows/workflow1.yaml
 
   workflow2:
     needs: workflow1
-    uses: ./.github/workflows/workflow2.yml
+    uses: ./.github/workflows/workflow2.yaml

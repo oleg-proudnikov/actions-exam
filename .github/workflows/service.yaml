@@ -18,8 +18,6 @@
         services:
           redis:
             image: ${{ needs.setup.outputs.image }}
-            ports:
-              - 6379:6379
 
         steps:
           - name: Install Redis CLI

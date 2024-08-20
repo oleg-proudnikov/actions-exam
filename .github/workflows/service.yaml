@@ -2,8 +2,17 @@ name: service
 on: workflow_dispatch
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.set.outputs.image }}
+    steps:
+      - id: set
+        run: echo "image=redis" >> "$GITHUB_OUTPUT"
+
   # Label of the container job
   container-job:
+    needs: setup
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in
@@ -14,7 +23,7 @@ jobs:
       # Label used to access the service container
       redis:
         # Docker Hub image
-        image: redis
+        image: ${{ needs.setup.outputs.image }}
         ports:
           # Opens tcp port 6379 on the host and service container
           - 6379:6379

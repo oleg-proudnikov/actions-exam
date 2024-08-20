@@ -1,0 +1,12 @@
+name: Import all and Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  workflow1:
+    uses: ./.github/workflows/workflow1.yml
+
+  workflow2:
+    needs: workflow1
+    uses: ./.github/workflows/workflow2.yml

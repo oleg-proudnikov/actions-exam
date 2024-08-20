@@ -1,4 +1,4 @@
-ame: workflow1
+name: workflow1
 on:
   workflow_dispatch:
 

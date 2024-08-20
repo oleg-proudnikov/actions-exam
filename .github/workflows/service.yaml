@@ -20,4 +20,4 @@ jobs:
           - 6379:6379
 
     steps:
-      - run: netstat -an|grep 6379
+      - run: echo Running

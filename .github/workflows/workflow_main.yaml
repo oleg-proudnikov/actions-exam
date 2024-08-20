@@ -3,6 +3,9 @@ name: workflow_main
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   workflow1:
     uses: ./.github/workflows/workflow1.yaml

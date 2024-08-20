@@ -8,6 +8,8 @@ jobs:
   deploy:
     name: Import external glossaries
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -22,9 +24,11 @@ jobs:
       ##############################
       - name: Commit and push the changes
         run: |
+          cat .git/config
+
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/oleg-proudnikov/actions-exam.git
+          #git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/oleg-proudnikov/actions-exam.git
 
           git add .
           git commit -m "chore: fetch content from various external sources"

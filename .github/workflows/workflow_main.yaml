@@ -1,4 +1,4 @@
-name: Import all and Deploy to GitHub Pages
+name: workflow_main
 
 on:
   workflow_dispatch:

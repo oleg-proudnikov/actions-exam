@@ -14,7 +14,9 @@ jobs:
 
       ##############################
       - name: Import external glossaries
-        run: echo $RANDOM > workflow2.txt
+        run: |
+          git pull
+          echo $RANDOM > workflow2.txt
       ##############################
 
 
@@ -30,6 +32,5 @@ jobs:
 
           git add .
           git commit -m "chore: fetch content from various external sources"
-          git pull
           git push
           git status

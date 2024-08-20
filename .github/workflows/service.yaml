@@ -28,4 +28,4 @@
               apt-get install -y redis-tools
           - name: Check Redis service
             run: |
-              redis-cli -h localhost -p 6379 ping
+              redis-cli -h redis -p 6379 ping

@@ -30,5 +30,6 @@ jobs:
 
           git add .
           git commit -m "chore: fetch content from various external sources"
+          git pull
           git push
           git status

@@ -17,7 +17,7 @@ jobs:
       - name: Import external glossaries
         run: |
           git pull
-          echo $RANDOM > workflow2.txt
+          echo $RANDOM > workflow1.txt
 
       - name: Commit and push the changes
         run: |

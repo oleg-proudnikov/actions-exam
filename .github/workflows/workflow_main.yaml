@@ -1,15 +1,15 @@
-name: workflow_main
+    name: workflow_main
 
-on:
-  workflow_dispatch:
+    on:
+      workflow_dispatch:
 
-permissions:
-  contents: write
+    permissions:
+      contents: write
 
-jobs:
-  workflow1:
-    uses: ./.github/workflows/workflow1.yaml
+    jobs:
+      workflow1:
+        uses: ./.github/workflows/workflow1.yaml
 
-  workflow2:
-    needs: workflow1
-    uses: ./.github/workflows/workflow2.yaml
+      workflow2:
+        needs: workflow1
+        uses: ./.github/workflows/workflow2.yaml

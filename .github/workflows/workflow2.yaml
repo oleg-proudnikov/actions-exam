@@ -14,7 +14,7 @@ jobs:
 
       ##############################
       - name: Import external glossaries
-        run: echo workflow2 > workflow2.txt
+        run: echo $RANDOM > workflow2.txt
       ##############################
 
 

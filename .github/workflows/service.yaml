@@ -1,5 +1,5 @@
 name: service
-on: wwirkflow_dispatch
+on: workflow_dispatch
 
 jobs:
   # Label of the container job

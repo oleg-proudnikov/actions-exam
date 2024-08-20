@@ -22,4 +22,6 @@
               - 6379:6379
 
         steps:
-          - run: echo Running
+          - name: Check Redis service
+            run: |
+              redis-cli -h localhost -p 6379 ping

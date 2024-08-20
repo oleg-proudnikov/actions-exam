@@ -26,7 +26,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/oleg-proudnikov/actions-exam.git
 
-          git add -A
+          git add .
           git commit -m "chore: fetch content from various external sources"
           git push
           git status

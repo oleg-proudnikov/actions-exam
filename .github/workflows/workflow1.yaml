@@ -24,8 +24,8 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          git add .
-          git commit -m "chore: fetch content from various external sources"
-          git pull
-          git push
-          git status
+          #git add .
+          #git commit -m "chore: fetch content from various external sources"
+          #git pull
+          #git push
+          #git status

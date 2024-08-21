@@ -1,28 +1,28 @@
-name: workflow2
-on:
-  workflow_dispatch:
+    name: workflow2
+    on:
+      workflow_dispatch:
 
-  workflow_call:
+      workflow_call:
 
-jobs:
-  deploy:
-    name: Import external glossaries
-    runs-on: ubuntu-latest
+    jobs:
+      deploy:
+        name: Import external glossaries
+        runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
+        steps:
+          - uses: actions/checkout@v3
 
-      - name: Import external glossaries
-        run: |
-          git pull
-          echo $RANDOM > workflow2.txt
+          - name: Import external glossaries
+            run: |
+              git pull
+              echo $RANDOM > workflow2.txt
 
-      - name: Commit and push the changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          - name: Commit and push the changes
+            run: |
+              git config --local user.email "action@github.com"
+              git config --local user.name "GitHub Action"
 
-          git add .
-          git commit -m "chore: fetch content from various external sources"
-          git push
-          git status
+              git add .
+              git commit -m "chore: fetch content from various external sources"
+              git push
+              git status

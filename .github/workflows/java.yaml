@@ -15,5 +15,6 @@ jobs:
 
     - name: Show java
       run: |
+        echo $JAVA_HOME
         echo $PATH
         java -version

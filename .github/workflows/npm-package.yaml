@@ -17,8 +17,6 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           #npm config set registry https://registry.npmjs.org/
           npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 #  npm ERR! need auth This command requires you to be logged in to https://registry.npmjs.org/
 #  npm ERR! need auth You need to authorize this machine using `npm adduser`

@@ -1,20 +1,26 @@
-name: java
+    name: java
 
-on:
-  workflow_dispatch
+    on:
+      workflow_dispatch
 
-jobs:
-  java:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Setup Java
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'adopt'
-        java-version: '21'
+    jobs:
+      java:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Setup Java
+          uses: actions/setup-java@v2
+          with:
+            distribution: 'adopt'
+            java-version: '21'
 
-    - name: Show java
-      run: |
-        echo $JAVA_HOME
-        echo $PATH
-        java -version
+        - name: Show java
+          run: |
+            echo $JAVA_HOME
+            echo $PATH
+            java -version
+
+    /opt/hostedtoolcache/Java_Adopt_jdk/21.0.4-7.0.LTS/x64
+    /opt/hostedtoolcache/Java_Adopt_jdk/21.0.4-7.0.LTS/x64/bin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+    openjdk version "21.0.4" 2024-07-16 LTS
+    OpenJDK Runtime Environment Temurin-21.0.4+7 (build 21.0.4+7-LTS)
+    OpenJDK 64-Bit Server VM Temurin-21.0.4+7 (build 21.0.4+7-LTS, mixed mode, sharing)

@@ -13,7 +13,10 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npm test
-      - run: npm publish
+      - run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm config set registry https://registry.npmjs.org/
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

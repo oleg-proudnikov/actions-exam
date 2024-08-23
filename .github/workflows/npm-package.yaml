@@ -22,3 +22,8 @@ jobs:
 #  npm ERR! need auth You need to authorize this machine using `npm adduser`
 
 # npm ERR!     /home/runner/.npm/_logs/2024-08-23T21_38_17_752Z-debug-0.log
+
+#  npm ERR! 403 403 Forbidden - PUT https://registry.npmjs.org/@explore-npm%2fsample-package - You cannot publish over the previously published versions: 2.0.1.
+#  npm ERR! 403 In most cases, you or one of your dependencies are requesting
+#  npm ERR! 403 a package version that is forbidden by your security policy, or
+#  npm ERR! 403 on a server you do not have access to.

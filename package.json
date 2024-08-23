@@ -1,6 +1,6 @@
 {
   "name": "@explore-npm/sample-package",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Publish GitHub Package",
   "main": "index.js",
   "scripts": {

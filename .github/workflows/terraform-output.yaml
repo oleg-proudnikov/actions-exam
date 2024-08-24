@@ -1,0 +1,40 @@
+name: terraform-output
+
+on: workflow_dispatch
+
+jobs:
+  iam:
+    name: "TF: IAM Resources"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    outputs:
+      tf-run-svc-account: ${{ steps.admin-service-account.outputs.service-account-email }}
+    steps:
+      - name: Terraform output service account
+        id: output
+        run: |
+          echo email > terraform-output.txt
+          data=$(cat terraform-output.txt)
+          echo "service_account_email=$data" >> "$GITHUB_ENV"
+
+      - name: Set output context
+        id: admin-service-account
+        run: |
+          # Access the environment variable set in the previous step
+          echo "Retrieved service account email: ${{ env.service_account_email }}"
+          echo "service-account-email=${{ env.service_account_email }}" >> "$GITHUB_OUTPUT"
+
+
+  storage:
+    needs: [ iam ]
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      # This step returns empty strings, as if nothing is getting passed.
+      - name: Gather resource dependencies
+        run: |
+          echo "gcp_service_account_run=\"${{ needs.iam.outputs.tf-run-svc-account }}\""
+          echo "GCP Service Account: ${{ needs.iam.outputs.tf-run-svc-account }}"

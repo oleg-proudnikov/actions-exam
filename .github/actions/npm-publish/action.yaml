@@ -2,11 +2,16 @@ name: npm-publish
 
 description: Publish npm package to registry.npmjs.org using secrets.NPM_TOKEN
 
+inputs:
+  NPM_TOKEN:
+    description: 'Automation npm token'
+    required: true
+
 runs:
   using: "composite"
   steps:
     - shell: bash
       run: |
-        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{ inputs.NPM_TOKEN }}" > ~/.npmrc
         #npm config set registry https://registry.npmjs.org/
         npm publish --access public

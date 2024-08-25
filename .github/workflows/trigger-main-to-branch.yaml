@@ -28,4 +28,4 @@ jobs:
     if: github.ref_name != github.event.repository.default_branch
     steps:
       - name: Build feature branch
-        run: echo Build feature branch
+        run: echo Build feature branch ${{ github.ref_name }}

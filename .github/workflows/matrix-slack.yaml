@@ -11,7 +11,9 @@ jobs:
     steps:
       - name: Main step
         id: main-step
-        run: echo "Dummy step"
+        run: |
+          echo "Dummy step"
+          exit 1
       - if: always()
         run: |
           jq -cn  --arg runner ${{ matrix.runner }} --arg outcome ${{ steps.main-step.outcome }} '$ARGS.named' > outcome
@@ -27,11 +29,11 @@ jobs:
       outcomes: ${{ steps.collect.outputs.outcomes }}
     steps:
       - uses: actions/download-artifact@v4
-      - run: |
+      - id: collect
+        run: |
           outcomes="$(cat */outcome | jq -c --slurp .)"
-          echo $outcomes
           echo outcomes=$outcomes >> $GITHUB_OUTPUT
-        id: collect
+
 
   slack-post:
     needs: collect
@@ -45,5 +47,7 @@ jobs:
 #      runner: ${{ matrix.runner }}
 #      outcome: ${{ matrix.outcome }}
 #    secrets: inherit
+
+
     steps:
       - run: echo ${{ matrix.runner }} ${{ matrix.outcome }}

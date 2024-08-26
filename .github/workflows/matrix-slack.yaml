@@ -17,7 +17,7 @@ jobs:
           jq -cn  --arg runner ${{ matrix.runner }} --arg outcome ${{ steps.main-step.outcome }} '$ARGS.named' > outcome
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{ hashFiles('outcome')
+          name: ${{ hashFiles('outcome') }}
           path: outcome
 
   collect:

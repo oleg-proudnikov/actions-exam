@@ -6,6 +6,7 @@ jobs:
   run-http-server:
     runs-on: ubuntu-latest
     steps:
+      - run: echo '${{ toJson(env) }}'
       - run: |
           python3 -m http.server 3000 &
 

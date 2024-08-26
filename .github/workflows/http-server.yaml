@@ -1,0 +1,14 @@
+name: HTTP Server Workflow
+
+on: workflow_dispatch
+
+jobs:
+  run-http-server:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          python3 -m http.server 3000 &
+
+          sleep 5
+
+          curl http://localhost:3000

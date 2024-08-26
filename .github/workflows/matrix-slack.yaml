@@ -15,7 +15,7 @@ jobs:
       - if: always()
         run: |
           jq -cn  --arg runner ${{ matrix.runner }} --arg outcome ${{ steps.main-step.outcome }} '$ARGS.named' > outcome
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ hashFiles('outcome') }}
           path: outcome

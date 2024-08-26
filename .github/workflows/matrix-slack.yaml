@@ -29,6 +29,7 @@ jobs:
       - uses: actions/download-artifact@v3
       - run: |
           outcomes="$(cat */outcome | jq -c --slurp .)"
+          echo $outcomes
           echo outcomes=$outcomes >> GITHUB_OUTPUT
         id: collect
 

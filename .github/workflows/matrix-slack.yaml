@@ -1,0 +1,47 @@
+name:  Matrix workflow
+on: workflow_dispatch
+
+jobs:
+  TEST-JOB:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [DEV, TEST, PROD]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Main step
+        id: main-step
+        run: echo "Dummy step"
+      - if: always()
+        run: |
+          jq -cn  --arg runner ${{ matrix.runner }} --arg outcome ${{steps.main-step.outcome '$ARGS.named' > outcome
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ hashFiles('outcome')
+          path: outcome
+
+  collect:
+    runs-on:  ubuntu-latest
+    needs: TEST-JOB
+    outputs:
+      matrix: ${{ steps.collect.outputs.outcomes }}
+    steps:
+      - uses: actions/download-artifact@v3
+      - run: |
+          outcomes="$(cat */outcome | jq -c --slurp .)"
+          echo outcomes=$outcomes >> GITHUB_OUTPUT
+        id: collect
+
+  slack-post:
+    needs: collect
+    if: ${{ !cancelled() }}
+    strategy:
+      matrix:
+        include: ${{ fromJSON(needs.collect.outputs.outcomes) }}
+#    uses: .github/workflows/reusable-workflow.yml@main
+#    with:
+#      runner: ${{ matrix.runner }}
+#      outcome: ${{ matrix.outcome }}
+#    secrets: inherit
+    steps:
+      - run: echo ${{ matrix.runner }} ${{ matrix.outcome }}

@@ -35,6 +35,7 @@ jobs:
 
   slack-post:
     needs: collect
+    runs-on:  ubuntu-latest
     if: ${{ !cancelled() }}
     strategy:
       matrix:

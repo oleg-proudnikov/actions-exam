@@ -13,8 +13,9 @@ jobs:
       - name: Main step
         id: main-step
         run: |
-          echo "Dummy step"
-          exit 1
+          if [ ${{ matrix.runner }} = DEV ]; then
+            exit 1
+          fi
       - if: ${{ !cancelled() }}
         run: |
           jq -cn  --arg runner ${{ matrix.runner }} --arg outcome ${{ steps.main-step.outcome }} '$ARGS.named' > outcome

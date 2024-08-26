@@ -8,6 +8,7 @@ jobs:
       matrix:
         runner: [DEV, TEST, PROD]
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Main step
         id: main-step

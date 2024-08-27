@@ -18,7 +18,9 @@ jobs:
       - name: Show github context
         run: echo '${{ toJson(github.event.inputs) }}'
       - name: Show inputs context
-        run: echo '${{ toJson(inputs) }}'
+        run: |
+          echo '${{ toJson(inputs) }}'
+          echo '${{ toJson(inputs.graphics) }}'
       - name: call if !inputs.graphics
         if: ${{ !inputs.graphics }}
         run: echo graphics

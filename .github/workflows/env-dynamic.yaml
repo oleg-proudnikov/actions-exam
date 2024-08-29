@@ -1,0 +1,45 @@
+name: env-dynamic
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-env:
+    runs-on: ubuntu-latest
+    outputs:
+      env: ${{ steps.create.outputs.env }}
+    steps:
+      - name: Create dynamic environment
+        id: create
+        run: |
+          json="{}"
+
+          # Read name-value pairs
+          while IFS='=' read -r key value; do
+            if [ $value != null ]; then
+              if [ $value = true ] || [ $value = false ] || [[ $value =~ ^[0-9]+$ ]]; then
+                json=$(echo "$json" | jq --arg key "$key" --argjson value "$value" '. + {($key): $value}')
+              else
+                json=$(echo "$json" | jq --arg key "$key" --arg value "$value" '. + {($key): $value}')
+              fi
+            fi
+          done <<EOF
+          TF_VAR_aks_default_node_pool_auto_scaling_enabled=true
+          TF_VAR_aks_default_node_pool_vm_size=11
+          TF_VAR_aks_sku_tier=null
+          EOF
+
+          echo $json
+
+          {
+            echo env<<EOF
+            echo $json
+            echo EOF
+          } >> $GITHUB_OUTPUT
+
+      - name: Apply dynamic environment
+        run: |
+          echo $TF_VAR_aks_default_node_pool_auto_scaling_enabled
+          echo $TF_VAR_aks_default_node_pool_vm_size
+          echo $TF_VAR_aks_sku_tier
+        env: ${{ fromJson( steps.create.outputs.env ) }}

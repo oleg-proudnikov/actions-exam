@@ -21,7 +21,7 @@ jobs:
         run: |
           echo '${{ toJson(inputs) }}'
           echo '${{ toJson(inputs.graphics) }}'
-          echo '${{ inputs.graphics || "" }}'
+          echo '${{ inputs.graphics || '' }}'
       - name: call if !inputs.graphics
         if: ${{ !inputs.graphics }}
         run: echo graphics

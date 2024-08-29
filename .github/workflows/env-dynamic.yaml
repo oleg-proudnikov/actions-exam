@@ -28,7 +28,7 @@ jobs:
 
           # Read name-value pairs
           while IFS='=' read -r key value; do
-            if [ $value != null ]; then
+            if [ -n "$value" ] && [ $value != null ]; then
               if [ $value = true ] || [ $value = false ] || [[ $value =~ ^[0-9]+$ ]]; then
                 json=$(echo "$json" | jq -c --arg key "$key" --argjson value "$value" '. + {($key): $value}')
               else

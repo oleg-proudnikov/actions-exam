@@ -30,7 +30,7 @@ jobs:
           echo $json
 
           {
-            echo env<<EOF
+            echo "env<<EOF"
             echo $json
             echo EOF
           } >> $GITHUB_OUTPUT

@@ -2,6 +2,20 @@ name: env-dynamic
 
 on:
   workflow_dispatch:
+    inputs:
+      # AKS specific variables
+      aks-enable-autoscale:
+        type: boolean
+        description: Whether to enable AKS autoscale or not
+        required: false
+      aks-vm-size:
+        type: string
+        description: The VM size use for the AKS node-pool
+        required: false
+      aks-sku-tier:
+        type: string
+        description: The SKU tier for the AKS cluster
+        required: false
 
 jobs:
   create-env:
@@ -16,28 +30,18 @@ jobs:
           while IFS='=' read -r key value; do
             if [ $value != null ]; then
               if [ $value = true ] || [ $value = false ] || [[ $value =~ ^[0-9]+$ ]]; then
-                json=$(echo "$json" | jq --arg key "$key" --argjson value "$value" '. + {($key): $value}')
+                json=$(echo "$json" | jq -c --arg key "$key" --argjson value "$value" '. + {($key): $value}')
               else
-                json=$(echo "$json" | jq --arg key "$key" --arg value "$value" '. + {($key): $value}')
+                json=$(echo "$json" | jq -c --arg key "$key" --arg value "$value" '. + {($key): $value}')
               fi
             fi
           done <<EOF
-          TF_VAR_aks_default_node_pool_auto_scaling_enabled=true
-          TF_VAR_aks_default_node_pool_vm_size=11
-          TF_VAR_aks_sku_tier=null
+          TF_VAR_aks_default_node_pool_auto_scaling_enabled=${{ inputs.aks-enable-autoscale }}
+          TF_VAR_aks_default_node_pool_vm_size=${{ inputs.aks-vm-size }}
+          TF_VAR_aks_sku_tier=${{ inputs.aks-sku-tier }}
           EOF
 
-          echo $json
-
-          {
-            echo "env<<EOF"
-            echo $json
-            echo EOF
-          } >> $GITHUB_OUTPUT
-
-      - name: Check dynamic environment
-        run: |
-          echo '${{ steps.create.outputs.env }}'
+          echo env=$json >> $GITHUB_OUTPUT
 
       - name: Apply dynamic environment
         run: |

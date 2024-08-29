@@ -6,8 +6,6 @@ on:
 jobs:
   create-env:
     runs-on: ubuntu-latest
-    outputs:
-      env: ${{ steps.create.outputs.env }}
     steps:
       - name: Create dynamic environment
         id: create
@@ -36,6 +34,10 @@ jobs:
             echo $json
             echo EOF
           } >> $GITHUB_OUTPUT
+
+      - name: Check dynamic environment
+        run: |
+          echo '${{ steps.create.outputs.env }}'
 
       - name: Apply dynamic environment
         run: |

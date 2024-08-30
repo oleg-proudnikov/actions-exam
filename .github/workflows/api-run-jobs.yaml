@@ -21,6 +21,10 @@ jobs:
 
   status:
     runs-on: ubuntu-latest
+    needs:
+      - job1
+      - job2
+      - job3
     steps:
       - run: |
           gh api /repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs | jq '.jobs[]| select (.conclusion == "success") | .name, .head_branch, (.steps[]|select(.conclusion == "success")|.name)'

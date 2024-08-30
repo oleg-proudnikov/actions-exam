@@ -1,0 +1,25 @@
+name: api-run-jobs
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo 1
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo 2
+  job3:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo 3
+
+  status:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          gh api /repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs | jq '.jobs[]| select (.conclusion == "success") | .name, .head_branch, (.steps[]|select(.conclusion == "success")|.name)'
+          gh api /repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs

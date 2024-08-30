@@ -27,8 +27,8 @@ jobs:
       - job3
     steps:
       - run: |
-          echo /repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs
-          gh api /repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs | jq '.jobs[]| select (.conclusion == "success") | .name, .head_branch, (.steps[]|select(.conclusion == "success")|.name)'
-          gh api /repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs
+          echo /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs
+          gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs | jq '.jobs[]| select (.conclusion == "success") | .name, .head_branch, (.steps[]|select(.conclusion == "success")|.name)'
+          gh api /repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/jobs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

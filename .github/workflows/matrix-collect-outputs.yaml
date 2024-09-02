@@ -37,8 +37,8 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
       - run: |
-#          matrix="$(cat */matrix | jq -c --slurp .)"
-#          echo "::set-output name=matrix::$matrix"
+          #matrix="$(cat */matrix | jq -c --slurp .)"
+          #echo "::set-output name=matrix::$matrix"
           echo matrix=$(cat */matrix | jq -c --slurp .) >> $GITHUB_OUTPUT
         id: matrix
 

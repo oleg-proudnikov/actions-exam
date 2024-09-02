@@ -1,0 +1,36 @@
+name: Release folder_a
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "folder_*/**"
+
+permissions:
+  contents: write
+
+jobs:
+
+  collect:
+    runs-on:  ubuntu-latest
+    outputs:
+      outcomes: ${{ steps.collect.outputs.folders }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: collect
+        run: |
+          git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }} | sed 's|/.*||' | uniq | jq -R -s -c 'split("\n")' > folders
+          echo folders=$(cat folders) >> $GITHUB_OUTPUT
+
+  release:
+    needs: collect
+    runs-on:  ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        folder: ${{ fromJSON(needs.collect.outputs.folders) }}
+    uses: ./.github/workflows/release.yml
+    secrets: inherit
+    with:
+      prefix: ${{ matrix.folder }}

@@ -26,3 +26,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: echo
+
+  result:
+    if: always()
+    needs: [deploy-env]
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo ${{ needs.deploy-env.result }}

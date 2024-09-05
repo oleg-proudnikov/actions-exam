@@ -1,0 +1,28 @@
+name: if-result
+
+on: workflow_dispatch
+
+jobs:
+  build-x:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo
+
+  build-y:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo
+
+  deploy-env:
+    if: always()
+    needs: [build-x, build-y]
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo
+
+  comment:
+    if: always() && needs.deploy-env.result != 'skipped'
+    needs: [deploy-env]
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo

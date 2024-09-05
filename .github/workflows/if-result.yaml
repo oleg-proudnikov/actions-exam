@@ -4,13 +4,11 @@ on: workflow_dispatch
 
 jobs:
   build-x:
-    if: github.event.pull_request.state != 'closed' && contains(github.event.pull_request.labels.*.name, 'deploy')
     runs-on: ubuntu-latest
     steps:
       - run: echo
 
   build-y:
-    if: github.event.pull_request.state != 'closed' && contains(github.event.pull_request.labels.*.name, 'deploy')
     runs-on: ubuntu-latest
     steps:
       - run: echo

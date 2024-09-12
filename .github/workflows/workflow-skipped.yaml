@@ -2,7 +2,10 @@ name: workflow-skipped
 on:
   workflow_dispatch:
 
-run-name: ${{ contains(github.event.issue.labels.*.name, 'bug') }}
+run-name: |
+  ${{ contains(github.event.issue.labels.*.name, 'bug') ||
+  contains(github.event.issue.labels.*.name, 'dependencies') ||
+  contains(github.event.issue.labels.*.name, 'enhancement') }}
 
 jobs:
   fail:

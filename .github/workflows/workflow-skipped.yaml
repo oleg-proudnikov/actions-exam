@@ -2,10 +2,20 @@ name: workflow-skipped
 on:
   workflow_dispatch:
 
+run-name: ${{ contains(github.event.issue.labels.*.name, 'bug') }}
+
 jobs:
-  deploy:
+  fail:
     runs-on: ubuntu-latest
     if: false
+
+    steps:
+      - run: echo Never run
+
+  pass:
+    meeds: fail
+    runs-on: ubuntu-latest
+    if: needs.fail.outcome != 'skipped' && false
 
     steps:
       - run: echo Never run

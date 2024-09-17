@@ -17,3 +17,4 @@ jobs:
       - id: step2
         run: |
           echo ${{ steps.step1.outputs.tags }}
+          echo '${{ steps.step1.outputs.tags }}'

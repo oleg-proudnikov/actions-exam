@@ -10,13 +10,17 @@ jobs:
       - id: step1
         run: |
           {
-          echo "tags<<EOF"
-          echo '{"key1": "value1", "key2": "value2", "key3": "value3"}'
+          echo "m-tags<<EOF"
+          echo '{
+                  "key1": "value1",
+                  "key2": "value2",
+                  "key3": "value3"
+                }'
           echo EOF
           } >> $GITHUB_OUTPUT
-          echo tags2='{"key1": "value1", "key2": "value2", "key3": "value3"}' >> $GITHUB_OUTPUT
+          echo tags='{"key1": "value1", "key2": "value2", "key3": "value3"}' >> $GITHUB_OUTPUT
       - id: step2
         run: |
           echo ${{ steps.step1.outputs.tags }}
+          echo '${{ steps.step1.outputs.m-tags }}'
           echo '${{ steps.step1.outputs.tags }}'
-          echo '${{ steps.step1.outputs.tags2 }}'

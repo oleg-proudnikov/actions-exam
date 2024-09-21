@@ -11,11 +11,12 @@ jobs:
         run: |
           {
           echo "m-tags<<EOF"
-          echo '{
-                  "key1": "value1",
-                  "key2": "value2",
-                  "key3": "value3"
-                }'
+          echo '
+          {
+            "key1": "value1",
+            "key2": "value2",
+            "key3": "value3"
+          }'
           echo EOF
           } >> $GITHUB_OUTPUT
           echo tags='{"key1": "value1", "key2": "value2", "key3": "value3"}' >> $GITHUB_OUTPUT

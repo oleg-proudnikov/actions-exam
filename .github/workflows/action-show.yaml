@@ -1,0 +1,36 @@
+# .github/workflows/markdown-lint.yml
+
+name: action-show
+on: workflow_dispatch
+
+jobs:
+  show-action:
+    runs-on: ubuntu-latest
+    env:
+      a: aaa
+    steps:
+      - name: Call action 1
+        uses: ./.github/actions/show
+      - name: Call action 2
+        uses: ./.github/actions/show
+        env:
+          a: ${{ env.a }}
+
+  show-workflow-1:
+    needs: show-action
+    uses: ./github/workflows/workflow-show
+
+  show-workflow-2:
+    needs: show-workflow-1
+    uses: ./github/workflows/workflow-show
+    env:
+      a: ${{ env.a }}
+
+  show-workflow-3:
+    needs: show-workflow-2
+    uses: ./github/workflows/workflow-show
+    secrets:
+      SECRET_1: ${{ secrets.SECRET_1 }}
+    env:
+      a: ${{ env.a }}
+

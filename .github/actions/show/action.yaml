@@ -1,0 +1,12 @@
+name: show
+
+description: Show environment
+
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+        echo ${{ env.a }}
+        echo $a
+        echo ${{ secrets.SECRET_1 }}

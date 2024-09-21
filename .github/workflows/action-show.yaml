@@ -15,8 +15,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Call action 1
         uses: ./.github/actions/show
+        with:
+          SECRET_1: ${{ secrets.SECRET_1 }}
       - name: Call action 2
         uses: ./.github/actions/show
+        with:
+          SECRET_1: ${{ secrets.SECRET_1 }}
         env:
           a: ${{ env.a }}
 

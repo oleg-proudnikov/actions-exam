@@ -1,7 +1,6 @@
 name: show
 
 description: Show environment
-
 inputs:
   SECRET_1:
     type: string
@@ -13,6 +12,7 @@ runs:
     - shell: bash
       run: |
         echo ${{ env.a }}
+        echo ${{ env.b }}
         echo $a
         echo ${{ inputs.SECRET_1 }}
         echo $INPUT_SECRET_1

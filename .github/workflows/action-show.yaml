@@ -17,6 +17,8 @@ jobs:
         uses: ./.github/actions/show
         with:
           SECRET_1: ${{ secrets.SECRET_1 }}
+        env:
+          b: bbb
       - name: Call action 2
         uses: ./.github/actions/show
         with:

@@ -6,7 +6,7 @@ on:
   workflow_call:
     secrets:
       SECRET_1:
-        deascription: secret 1
+        description: secret 1
 
 jobs:
   deploy:

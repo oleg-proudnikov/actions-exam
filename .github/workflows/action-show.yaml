@@ -1,7 +1,10 @@
 # .github/workflows/markdown-lint.yml
 
 name: action-show
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches: main
 
 jobs:
   show-action:

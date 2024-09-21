@@ -19,3 +19,4 @@ jobs:
           echo ${{ env.a }}
           echo $a
           echo ${{ secrets.SECRET_1 }}
+          echo ${{ secrets.GITHUB_TOKEN }}

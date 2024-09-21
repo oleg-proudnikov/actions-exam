@@ -2,6 +2,11 @@ name: show
 
 description: Show environment
 
+inputs:
+  SECRET_1:
+    type: string
+    description: secret 1
+
 runs:
   using: "composite"
   steps:
@@ -9,4 +14,5 @@ runs:
       run: |
         echo ${{ env.a }}
         echo $a
-        echo ${{ secrets.SECRET_1 }}
+        echo ${{ inputs.SECRET_1 }}
+        echo $INPUT_SECRET_1

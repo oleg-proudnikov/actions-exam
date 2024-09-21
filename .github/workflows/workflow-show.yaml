@@ -8,8 +8,6 @@ jobs:
   deploy:
     name: Import external glossaries
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - shell: bash

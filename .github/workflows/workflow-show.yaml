@@ -4,6 +4,10 @@ on:
 
   workflow_call:
 
+  secrets:
+    SECRET_1:
+      deascription: secret 1
+
 jobs:
   deploy:
     name: Import external glossaries

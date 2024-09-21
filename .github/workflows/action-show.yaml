@@ -33,6 +33,8 @@ jobs:
   show-workflow-2:
     needs: show-workflow-1
     uses: ./.github/workflows/workflow-show.yaml
+    env:
+      a: ${{ env.a }}
 
   show-workflow-3:
     needs: show-workflow-2

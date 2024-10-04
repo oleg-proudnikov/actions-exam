@@ -1,10 +1,6 @@
-name: show
+name: show-environment
 
 description: Show environment
-inputs:
-  SECRET_1:
-    type: string
-    description: secret 1
 
 runs:
   using: "composite"
@@ -13,6 +9,11 @@ runs:
       run: |
         echo ${{ env.a }}
         echo ${{ env.b }}
+        echo ${{ env.c }}
+        echo ${{ env.d }}
         echo $a
-        echo ${{ inputs.SECRET_1 }}
-        echo $INPUT_SECRET_1
+        echo $b
+        echo $c
+        echo $d
+        export e=eee
+        echo f=fff >> $GITHUB_ENV

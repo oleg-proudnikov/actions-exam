@@ -1,10 +1,6 @@
-# .github/workflows/markdown-lint.yml
-
 name: action-show
-on:
-  workflow_dispatch:
-  push:
-    branches: main
+
+on: workflow_dispatch
 
 env:
   a: aaa
@@ -13,25 +9,13 @@ jobs:
   show-action:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Call action 1
-        uses: ./.github/actions/show
-        with:
-          SECRET_1: ${{ secrets.SECRET_1 }}
-      - name: Call action 2
-        uses: ./.github/actions/show
-        with:
-          SECRET_1: ${{ secrets.SECRET_1 }}
+      - run: echo b=bbb >> $GITHUB_ENV
+      - run: export c=ccc
+      - uses: ./.github/actions/show
         env:
-          b: bbb
-
-  show-workflow-1:
-    needs: show-action
-    uses: ./.github/workflows/workflow-show.yaml
-
-  show-workflow-2:
-    needs: show-workflow-1
-    uses: ./.github/workflows/workflow-show.yaml
-    secrets:
-      SECRET_1: ${{ secrets.SECRET_1 }}
-
+          d: ddd
+      - run: |
+          echo ${{ env.e }}
+          echo ${{ env.f }}
+          echo $e
+          echo $f

@@ -16,7 +16,9 @@ jobs:
         env:
           d: ddd
       - run: |
+          echo ${{ env.c }}
           echo ${{ env.e }}
           echo ${{ env.f }}
+          echo $c
           echo $e
           echo $f

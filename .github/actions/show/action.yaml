@@ -16,4 +16,6 @@ runs:
         echo $c
         echo $d
         export e=eee
+        echo a=AAA >> $GITHUB_ENV
+        echo c=ccc >> $GITHUB_ENV
         echo f=fff >> $GITHUB_ENV

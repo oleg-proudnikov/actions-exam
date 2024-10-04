@@ -16,11 +16,9 @@ jobs:
         env:
           d: ddd
       - run: |
-          echo ${{ env.a }}
-          echo ${{ env.c }}
-          echo ${{ env.e }}
-          echo ${{ env.f }}
-          echo $a
-          echo $c
-          echo $e
-          echo $f
+          echo a=${{ env.a }} $a
+          echo b=${{ env.b }} $b
+          echo c=${{ env.c }} $c
+          echo d=${{ env.d }} $d
+          echo e=${{ env.e }} $e
+          echo f=${{ env.f }} $f

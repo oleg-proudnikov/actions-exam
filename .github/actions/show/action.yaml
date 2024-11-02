@@ -7,11 +7,13 @@ runs:
   steps:
     - shell: bash
       run: |
+        export e=e
+        echo a=A >> $GITHUB_ENV
+        echo c=c >> $GITHUB_ENV
+        echo f=f >> $GITHUB_ENV
         echo a=${{ env.a }} $a
         echo b=${{ env.b }} $b
         echo c=${{ env.c }} $c
         echo d=${{ env.d }} $d
-        export e=eee
-        echo a=AAA >> $GITHUB_ENV
-        echo c=ccc >> $GITHUB_ENV
-        echo f=fff >> $GITHUB_ENV
+        echo e=${{ env.e }} $e
+        echo f=${{ env.f }} $f

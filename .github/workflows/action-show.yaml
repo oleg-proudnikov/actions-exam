@@ -3,18 +3,21 @@ name: action-show
 on: workflow_dispatch
 
 env:
-  a: aaa
+  a: a
 
 jobs:
   show-action:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo b=bbb >> $GITHUB_ENV
-      - run: export c=ccc
+        with:
+          sparse-checkout: .github
+      - run: ls -l
+      - run: echo b=b >> $GITHUB_ENV
+      - run: export c=c
       - uses: ./.github/actions/show
         env:
-          d: ddd
+          d: d
       - run: |
           echo a=${{ env.a }} $a
           echo b=${{ env.b }} $b

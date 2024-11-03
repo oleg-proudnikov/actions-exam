@@ -21,3 +21,7 @@ runs:
 #      shell: bash
 #      run: |
 #        echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
+    - name: Show context
+      shell: bash
+      run: |
+        echo ${{ toJson(github) }}

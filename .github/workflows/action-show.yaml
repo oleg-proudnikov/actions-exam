@@ -34,6 +34,9 @@ jobs:
       - name: Show GITHUB_TOKEN
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
+      - name: Show context
+        run: |
+          echo ${{ toJson(github) }}
 
   env-2:
     needs: env-1
@@ -52,3 +55,6 @@ jobs:
       - name: Show GITHUB_TOKEN
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
+      - name: Show context
+        run: |
+          echo ${{ toJson(github) }}

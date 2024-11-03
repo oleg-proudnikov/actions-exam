@@ -30,12 +30,10 @@ jobs:
           echo f=${{ env.f }}
       - name: Show GITHUB_TOKEN
         run: |
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          echo $GITHUB_TOKEN | sed 's/./& /g'
+          echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
       - name: Show GITHUB_TOKEN
         run: |
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          echo $GITHUB_TOKEN | sed 's/./& /g'
+          echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
 
   env-2:
     needs: env-1
@@ -50,9 +48,7 @@ jobs:
           echo e=${{ env.e }}
       - name: Show GITHUB_TOKEN
         run: |
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          echo $GITHUB_TOKEN | sed 's/./& /g'
+          echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
       - name: Show GITHUB_TOKEN
         run: |
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          echo $GITHUB_TOKEN | sed 's/./& /g'
+          echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'

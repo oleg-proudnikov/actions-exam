@@ -10,9 +10,9 @@ runs:
         export e=e
         echo a=A >> $GITHUB_ENV
         echo f=f >> $GITHUB_ENV
-        echo a=${{ env.a }} $a
-        echo b=${{ env.b }} $b
-        echo c=${{ env.c }} $c
-        echo d=${{ env.d }} $d
-        echo e=${{ env.e }} $e
-        echo f=${{ env.f }} $f
+        echo a=${{ env.a }}
+        echo b=${{ env.b }}
+        echo c=${{ env.c }}
+        echo d=${{ env.d }}
+        echo e=${{ env.e }}
+        echo f=${{ env.f }}

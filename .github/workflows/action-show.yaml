@@ -6,26 +6,38 @@ env:
   a: a
 
 jobs:
-  show-action:
+  env-1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: .github
-      - run: ls -l
-      - run: echo b=b >> $GITHUB_ENV
-      - run: export c=c
-      - name: Before the action
+          sparse-checkout: .github/actions/show
+      - run: ls -al
+      - name: Set env
         run: |
-          echo c=${{ env.c }} $c
+          echo b=b >> $GITHUB_ENV
+          export c=c
       - uses: ./.github/actions/show
         env:
           d: d
-      - name: After the action
+      - name: Show env
         run: |
-          echo a=${{ env.a }} $a
-          echo b=${{ env.b }} $b
-          echo c=${{ env.c }} $c
-          echo d=${{ env.d }} $d
-          echo e=${{ env.e }} $e
-          echo f=${{ env.f }} $f
+          echo a=${{ env.a }}
+          echo b=${{ env.b }}
+          echo c=${{ env.c }}
+          echo d=${{ env.d }}
+          echo e=${{ env.e }}
+          echo f=${{ env.f }}
+
+  env-2:
+    needs: env-1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show env
+        run: |
+          echo a=${{ env.a }}
+          echo b=${{ env.b }}
+          echo c=${{ env.c }}
+          echo d=${{ env.d }}
+          echo e=${{ env.e }}
+          echo f=${{ env.f }}

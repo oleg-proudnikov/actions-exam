@@ -15,10 +15,14 @@ jobs:
       - run: ls -l
       - run: echo b=b >> $GITHUB_ENV
       - run: export c=c
+      - name: Before the action
+        run: |
+          echo c=${{ env.c }} $c
       - uses: ./.github/actions/show
         env:
           d: d
-      - run: |
+      - name: After the action
+        run: |
           echo a=${{ env.a }} $a
           echo b=${{ env.b }} $b
           echo c=${{ env.c }} $c

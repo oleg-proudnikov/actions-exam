@@ -17,10 +17,10 @@ runs:
         echo d=${{ env.d }}
         echo e=${{ env.e }}
         echo f=${{ env.f }}
-#    - name: Show GITHUB_TOKEN
-#      shell: bash
-#      run: |
-#        echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
+    - name: Show GITHUB_TOKEN
+      shell: bash
+      run: |
+        echo ${{ github.token }} | sed 's/./& /g'
     - name: Show context
       shell: bash
       run: |

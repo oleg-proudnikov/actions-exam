@@ -28,6 +28,10 @@ jobs:
           echo d=${{ env.d }}
           echo e=${{ env.e }}
           echo f=${{ env.f }}
+      - name: Show GITHUB_TOKEN
+        run: |
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          echo $GITHUB_TOKEN | sed 's/./& /g'
 
   env-2:
     needs: env-1
@@ -40,4 +44,7 @@ jobs:
           echo c=${{ env.c }}
           echo d=${{ env.d }}
           echo e=${{ env.e }}
-          echo f=${{ env.f }}
+      - name: Show GITHUB_TOKEN
+        run: |
+          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          echo $GITHUB_TOKEN | sed 's/./& /g'

@@ -17,8 +17,3 @@ runs:
         echo d=${{ env.d }}
         echo e=${{ env.e }}
         echo f=${{ env.f }}
-    - name: Show GITHUB_TOKEN
-      shell: bash
-      run: |
-        GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-        echo $GITHUB_TOKEN | sed 's/./& /g'

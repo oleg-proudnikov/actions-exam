@@ -19,8 +19,6 @@ jobs:
     uses: ./.github/workflows/show.yaml
     secrets:
       SECRET: ${{ secrets.GITHUB_TOKEN }}
-    env:
-      d: d
 
   env-3:
     needs: env-2

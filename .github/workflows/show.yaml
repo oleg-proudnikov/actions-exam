@@ -1,0 +1,38 @@
+name: show
+
+on:
+  workflow_dispatch:
+
+  workflow_call:
+    secrets:
+      SECRET:
+        description: secret
+
+jobs:
+  show:
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: Set and show env
+      shell: bash
+      run: |
+        export e=e
+        echo a=A >> $GITHUB_ENV
+        echo f=f >> $GITHUB_ENV
+        echo a=${{ env.a }}
+        echo b=${{ env.b }}
+        echo c=${{ env.c }}
+        echo d=${{ env.d }}
+        echo e=${{ env.e }}
+        echo f=${{ env.f }}
+    - name: Show GITHUB_TOKEN
+      shell: bash
+      run: |
+        echo ${{ github.token }} | sed 's/./& /g'
+        echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
+        echo ${{ secrets.SECRET }} | sed 's/./& /g'
+    - name: Show context
+      shell: bash
+      run: |
+        echo '${{ toJson(github) }}'
+

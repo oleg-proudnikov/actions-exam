@@ -1,22 +1,39 @@
-name: workflow1
+name: workflow-show
 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 
-  workflow_call:
-    secrets:
-      SECRET_1:
-        description: secret 1
+env:
+  a: a
 
 jobs:
-  deploy:
-    name: Import external glossaries
+  env-1:
     runs-on: ubuntu-latest
-
     steps:
-      - shell: bash
+      - name: Set env
         run: |
-          echo ${{ env.a }}
-          echo $a
-          echo ${{ secrets.SECRET_1 }}
-          echo ${{ secrets.GITHUB_TOKEN }}
+          echo b=b >> $GITHUB_ENV
+          export c=c
+
+  env-2:
+    needs: env-1
+    uses: ./.github/workflows/show.yaml
+    env:
+      d: d
+
+  env-3:
+    needs: env-2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show env
+        run: |
+          echo a=${{ env.a }}
+          echo b=${{ env.b }}
+          echo c=${{ env.c }}
+          echo d=${{ env.d }}
+          echo e=${{ env.e }}
+      - name: Show GITHUB_TOKEN
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
+      - name: Show context
+        run: |
+          echo '${{ toJson(github) }}'

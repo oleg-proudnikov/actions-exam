@@ -89,7 +89,7 @@ jobs:
 
   go-container:
     runs-on: ubuntu-latest
-    containere:
+    container:
       image: golang:1.21.1
     steps:
       - name: Checkout

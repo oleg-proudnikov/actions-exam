@@ -76,6 +76,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        uses: actions/checkout@v4
       - run: |
           cd go
           docker build -t go .

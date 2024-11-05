@@ -12,16 +12,13 @@ jobs:
   show:
     runs-on: ubuntu-latest
     steps:
-      - name: Set and show env
+      - name: Show env
         shell: bash
         run: |
           echo a=${{ env.a }}
           echo b=${{ env.b }}
 
-          echo a=A >> $GITHUB_ENV
-          echo c=c >> $GITHUB_ENV
-
-      - name: Show GITHUB_TOKEN
+      - name: Show Secrets
         shell: bash
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'

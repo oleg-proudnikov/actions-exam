@@ -1,0 +1,8 @@
+# action.yml
+name: 'Go version'
+description: 'Show go version'
+inputs:
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+

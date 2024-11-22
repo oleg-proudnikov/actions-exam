@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show env
-        shell: bash
+#        shell: bash
         run: |
           echo a=${{ env.a }}
           echo b=${{ env.b }}
 
       - name: Show Secrets
-        shell: bash
+#        shell: bash
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
           echo ${{ secrets.SECRET }} | sed 's/./& /g'

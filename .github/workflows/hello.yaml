@@ -45,5 +45,6 @@ jobs:
       
       - name: Display Workflow Summary
         run: |
+          cat summary.md
           cat summary.md >> $GITHUB_STEP_SUMMARY
         shell: bash

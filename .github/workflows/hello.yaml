@@ -23,8 +23,9 @@ jobs:
       - name: Run CLI command
         id: evals
         run: |
-         
-          results_html+="<h3>Heading</h3>"
+
+          IMG_BASE64=$(base64 a.png | tr -d '\n')
+          results_html+="<h3>Heading</h3><img src=\"data:image/png;base64,$IMG_BASE64\">"
       
           echo "results_html<<EOF" >> $GITHUB_OUTPUT
           echo "$results_html" >> $GITHUB_OUTPUT

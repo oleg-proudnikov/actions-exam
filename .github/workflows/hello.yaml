@@ -16,3 +16,31 @@ jobs:
           who-to-greet: 'Mona the Octocat'
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+  summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run CLI command
+        id: evals
+        run: |
+         
+          results_html+="<h3>Heading</h3>"
+      
+          echo "results_html<<EOF" >> $GITHUB_OUTPUT
+          echo "$results_html" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        shell: bash
+      
+      - name: Generate Summary markdown
+        run: |
+          cat <<EOF > summary.md
+          ## :bar_chart: Eval Results
+      
+          ${{ steps.evals.outputs.results_html }}
+          EOF
+        shell: bash
+      
+      - name: Display Workflow Summary
+        run: |
+          cat summary.md >> $GITHUB_STEP_SUMMARY
+        shell: bash
